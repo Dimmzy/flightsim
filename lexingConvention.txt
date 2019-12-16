@@ -1,5 +1,5 @@
 Function:
-name,=,val1,val2,...
+name,=,val1,operator?,val2,...
 Var:
 var,name,set/get,"path"
 Condition:
