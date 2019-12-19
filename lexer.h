@@ -8,7 +8,7 @@
 
 class lexer {
  public:
-  static vector<string> lex(fstream file);
+  static std::vector<std::string> lex(std::string file);
 };
 
 #endif //FLIGHTSIM__LEXER_H_

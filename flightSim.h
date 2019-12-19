@@ -13,9 +13,9 @@ using namespace std;
 class flightSim {
   map<string, variable> varMap;
   map<string, variable> pathMap;
-  map<string, command> cmdMap;
+  //map<string, command> cmdMap;
 
-
+ public:
   void run();
 };
 
