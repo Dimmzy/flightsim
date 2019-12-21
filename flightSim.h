@@ -5,18 +5,24 @@
 #include <vector>
 #include <fstream>
 #include "variable.h"
-#include "command.h"
+#include "Command.h"
 #include "lexer.h"
+#include "Commands/Connect.h"
+#include "Commands/DefineVar.h"
+#include "Commands/OpenServer.h"
+#include "Commands/Print.h"
+#include "Commands/Sleep.h"
 
-using namespace std;
 
 class flightSim {
-  map<string, variable> varMap;
-  map<string, variable> pathMap;
-  //map<string, command> cmdMap;
+  std::string fileName;
+  map<std::string, Command> commands;
 
  public:
+  flightSim(std::string name) : fileName(name) {};
   void run();
+ private:
+  void generateMap();
 };
 
 #endif //FLIGHTSIM__FLIGHTSIM_H_
