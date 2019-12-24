@@ -4,6 +4,7 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <map>
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
@@ -46,5 +47,6 @@ class DefineVar : public Command {
  public:
   int execute(std::vector<std::string> args);
 };
+
 
 #endif //FLIGHTSIM__COMMAND_H_

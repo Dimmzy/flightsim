@@ -1,5 +1,5 @@
 openDataServer,OpenServer
-connectControlClient,Connect
+connectControlClient,ConnectServer
 var,DefineVar
 Sleep,Sleep
 Print,Print

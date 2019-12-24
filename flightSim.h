@@ -16,7 +16,7 @@
 
 class flightSim {
   std::string fileName;
-  map<std::string, Command> commands;
+  map<std::string, Command*> commandsMap;
 
  public:
   flightSim(std::string name) : fileName(name) {};

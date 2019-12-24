@@ -1,9 +1,14 @@
 #include "flightSim.h"
 
 void flightSim::run() {
-  std::vector<std::string> lexed = lexer::lex(this->fileName);
+    this->generateMap();
+    std::vector<std::string> lexed = lexer::lex(this->fileName);
 }
+
 void flightSim::generateMap() {
-  std::vector<std::string> keys = {"openDataServer","connectControlClient","var","Sleep","Print"};
-  std::vector<std::string> values = {"OpenServer","Connect","DefineVar","Sleep","Print"};
+    this->commandsMap["openDataServer"] = new OpenServer();
+    this->commandsMap["connectControlClient"] = new ConnectServer();
+    this->commandsMap["var"] = new DefineVar();
+    this->commandsMap["Sleep"] = new Sleep();
+    this->commandsMap["Print"] = new Print();
 }

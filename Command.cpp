@@ -62,3 +62,6 @@ int Sleep::execute(std::vector<std::string> args) {
 int DefineVar::execute(std::vector<std::string> args) {
 
 }
+While::While(map<std::string, Command *> &commands) {
+x
+}
