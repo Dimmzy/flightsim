@@ -10,6 +10,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <iostream>
+#include <VariableManager.h>
+#include <Variable.h>
 
 
 class Command {
@@ -44,6 +46,14 @@ class Sleep : public Command {
 };
 
 class DefineVar : public Command {
+ private:
+  VariableManager* varManager;
+ public:
+  DefineVar(VariableManager& vm) : varManager(vm) {};
+  int execute(std::vector<std::string> args);
+};
+
+class ConditionParser : public Command {
  public:
   int execute(std::vector<std::string> args);
 };

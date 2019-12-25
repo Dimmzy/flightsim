@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "variable.h"
 #include "Command.h"
 #include "lexer.h"
 #include "Commands/Connect.h"
@@ -17,6 +16,7 @@
 class flightSim {
   std::string fileName;
   map<std::string, Command*> commandsMap;
+  VariableMangager* varManager;
 
  public:
   flightSim(std::string name) : fileName(name) {};
