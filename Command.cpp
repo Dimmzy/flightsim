@@ -50,8 +50,8 @@ void ConnectServer::startClient(const char* ip, int port) {
 }
 
 int Print::execute(std::vector<std::string> args) {
-  std::cout << args[0] << std::endl;
-  return 2;
+  std::cout << args[1] << std::endl;
+  return 3;
 }
 
 int Sleep::execute(std::vector<std::string> args) {

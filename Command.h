@@ -54,9 +54,20 @@ class DefineVar : public Command {
 };
 
 class ConditionParser : public Command {
+ private:
+  std::vector<Command* loopcmd> cmdVector;
  public:
   int execute(std::vector<std::string> args);
 };
 
+class WhileLoop : public Command {
+ public:
+  int execute(std::vector<std::string> args);
+};
+
+class IfCommand : public Command {
+ public:
+  int execute(std::vector<std::string> args);
+};
 
 #endif //FLIGHTSIM__COMMAND_H_

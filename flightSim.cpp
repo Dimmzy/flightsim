@@ -3,18 +3,20 @@
 void flightSim::run() {
   this->varManager = new VariableManager();
   this->generateMap();
-  std::vector<std::string> lexed = lexer::lex(this->fileName);
+  std::vector<std::string> tokens = lexer::lex(this->fileName);
   int index = 0;
-  while (index < lexed.size()) {
-    if (this->commandsMap.find(lexed[index]) != this->commandsMap.end()) {
-      Command* c = this->commandsMap.find(lexed[index])->second;
+  while (index < tokens.size()) {
+    if (this->commandsMap.find(tokens[index]) != this->commandsMap.end()) {
+      Command* c = this->commandsMap.find(tokens[index])->second;
       index++;
       // subvector
-      auto first = lexed.begin() + index;
-      auto last = lexed.begin() + lexed.size();
+      auto first = tokens.begin() + index;
+      auto last = tokens.begin() + tokens.size();
       index += c->execute(std::vector<std::string>(first,last));
     } else {
-      if (this->varManager.)
+      // Find an already set variable.
+      if (this->varManager->getSymbolTable().find(tokens[index]) != this->varManager->getSymbolTable().end())
+        // Implement Expression Evaluation from Ex1
     }
   }
 }
