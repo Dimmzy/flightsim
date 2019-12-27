@@ -1,6 +1,6 @@
 #ifndef FLIGHTSIM__COMMAND_H_
 #define FLIGHTSIM__COMMAND_H_
-#include "flightSim.h"
+
 #include <vector>
 #include <thread>
 #include <chrono>
@@ -10,8 +10,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <iostream>
-#include <VariableManager.h>
-#include <Variable.h>
+#include "VariableManager.h"
+#include "Variable.h"
 
 
 class Command {

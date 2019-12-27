@@ -2,11 +2,14 @@
 #ifndef FLIGHTSIM_COMMANDS_OPENSERVER_H_
 #define FLIGHTSIM_COMMANDS_OPENSERVER_H_
 #include "../Command.h"
+#include "../VariableManager.h"
 
 class OpenServer : public Command {
  public:
-  int execute(std::vector<std::string> args);
+  explicit OpenServer(VariableManager* varm) : vm(varm) {};
+  int execute(std::vector<std::string> args) override;
  private:
+  VariableManager* vm;
   static void startServer(int port);
 };
 

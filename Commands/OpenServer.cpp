@@ -4,6 +4,7 @@
 int OpenServer::execute(std::vector<std::string> args) {
   int port = std::stoi(args[0]);
   std::thread serverThread(startServer,port);
+  serverThread.join();
   return 2;
 }
 
@@ -22,7 +23,13 @@ void OpenServer::startServer(int port) {
   int client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t*)&address);
   if (client_socket == -1)
     std::cerr << "Couldn't accept client" << std::endl;
+  else {
+    std::cout << "Connected" << std::endl;
+  }
+  close(socketfd);
   char buffer[1024] = {0};
-  int valread = read(client_socket, buffer, 1024);
+  while(read(client_socket, buffer, 1024) > 0)
+    std::cout << buffer << std::endl;
   // Write a parser that maps the variables and their values to our HashMap
+
 }

@@ -4,9 +4,9 @@
 
 class DefineVar : public Command {
  private:
-  VariableManager* varManager;
+  VariableManager varManager;
  public:
-  DefineVar(VariableManager& vm) : varManager(vm) {};
+  DefineVar(VariableManager vm) : varManager(vm) {};
   int execute(std::vector<std::string> args);
 };
 
