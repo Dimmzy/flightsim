@@ -6,7 +6,7 @@
 #include <fstream>
 #include "Command.h"
 #include "lexer.h"
-#include "Commands/Connect.h"
+#include "Commands/OpenClient.h"
 #include "Commands/DefineVar.h"
 #include "Commands/OpenServer.h"
 #include "Commands/Print.h"

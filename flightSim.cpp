@@ -5,6 +5,9 @@ void flightSim::run() {
   this->generateMap();
   std::vector<std::string> tokens = lexer::lex(this->fileName);
   int index = 0;
+  std::vector<string> serverags = {"5400"};
+  this->commandsMap.at("openDataServer")->execute(serverags);
+  /*
   while (index < tokens.size()) {
     if (this->commandsMap.find(tokens[index]) != this->commandsMap.end()) {
       Command* c = this->commandsMap.find(tokens[index])->second;
@@ -18,12 +21,12 @@ void flightSim::run() {
       if (this->varManager->getSymbolTable().find(tokens[index]) != this->varManager->getSymbolTable().end())
         // Implement Expression Evaluation from Ex1
     }
-  }
+  }*/
 }
 
 void flightSim::generateMap() {
   this->commandsMap["openDataServer"] = new OpenServer();
-  this->commandsMap["connectControlClient"] = new ConnectServer();
+  this->commandsMap["connectControlClient"] = new OpenClient();
   this->commandsMap["var"] = new DefineVar(*this->varManager);
   this->commandsMap["Sleep"] = new Sleep();
   this->commandsMap["Print"] = new Print();
