@@ -6,9 +6,10 @@
 class OpenClient : public Command {
  public:
   int execute(std::vector<std::string> args);
+  void sendUpdate(const std::string& message);
  private:
-  int  clientsocket;
-  static void startClient(const char* ip, int port);
+  int  clientSocket;
+  void startClient(const char* ip, int port);
 };
 
 #endif //FLIGHTSIM_COMMANDS_OPENCLIENT_H_

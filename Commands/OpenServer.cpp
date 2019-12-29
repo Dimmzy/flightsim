@@ -1,13 +1,16 @@
 
 #include <sstream>
 #include <cstring>
+#include <mutex>
 #include "OpenServer.h"
+
+std::mutex mtx;
 
 int OpenServer::execute(std::vector<std::string> args) {
   int port = std::stoi(args[0]);
+  mtx.lock();
   std::thread serverThread(&OpenServer::startServer,this,port);
   serverThread.join();
-  this->startServer(port);
   return 2;
 }
 
@@ -31,11 +34,11 @@ void OpenServer::startServer(int port) {
   }
   close(socketfd);
   char buffer[1024] = {0};
+  mtx.unlock();
   while(read(client_socket, buffer, 1024) > 0) {
     char* noNewLine = strtok(buffer, "\n");
     char* token = strtok(noNewLine, ",");
     for(const auto& path : this->vm->XMLVars) {
-
       if (this->vm->getBoundTable().count(path)) {
         this->vm->getBoundTable().at(path)->setValue(std::stod(token));
         std::cout << "updated " + path + " to " + token << std::endl;

@@ -10,6 +10,13 @@ void flightSim::run() {
   this->varManager->addBoundTable("/engines/engine/rpm",new Variable(0,"/engines/engine/rpm"));
   this->commandsMap.at("openDataServer")->execute(serverags);
   /*
+  this->varManager->addSymbol("throttle", new Variable(0,"/controls/engines/current-engine/throttle"));
+  sleep(30000);
+  this->client = new OpenClient();
+  auto it = this->varManager->getSymbolTable().at("thorttle");
+  it->setValue(1.00);
+  this->client->sendUpdate("set " + it->getPath() + " " + std::to_string(it->getValue()) + "\r\n");
+  /*
   while (index < tokens.size()) {
     if (this->commandsMap.find(tokens[index]) != this->commandsMap.end()) {
       Command* c = this->commandsMap.find(tokens[index])->second;
@@ -28,7 +35,7 @@ void flightSim::run() {
 
 void flightSim::generateMap() {
   this->commandsMap["openDataServer"] = new OpenServer(this->varManager);
-  this->commandsMap["connectControlClient"] = new OpenClient();
+  this->commandsMap["connectControlClient"] = this->client;
   this->commandsMap["var"] = new DefineVar(this->varManager);
   this->commandsMap["Sleep"] = new Sleep();
   this->commandsMap["Print"] = new Print();

@@ -17,6 +17,7 @@ class flightSim {
   std::string fileName;
   std::map<std::string, Command*> commandsMap;
   VariableManager* varManager;
+  OpenClient* client;
 
  public:
   flightSim(std::string name) : fileName(name) {};
