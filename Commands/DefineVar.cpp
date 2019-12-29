@@ -8,10 +8,10 @@ int DefineVar::execute(std::vector<std::string> args) {
   index++;
   auto* newVar = new Variable(0,varPath);
   if (args[index] == "<") {
-    this->varManager.addBoundTable(varName,newVar);
-    this->varManager.addSymbol(varName,newVar);
+    this->varManager->addBoundTable(varPath,newVar);
+    this->varManager->addSymbol(varName,newVar);
   } else if (args[index] == "-")  {
-    this->varManager.addSymbol(varName,newVar);
+    this->varManager->addSymbol(varName,newVar);
   }
   return 8;
 }

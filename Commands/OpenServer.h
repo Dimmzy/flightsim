@@ -10,7 +10,7 @@ class OpenServer : public Command {
   int execute(std::vector<std::string> args) override;
  private:
   VariableManager* vm;
-  static void startServer(int port);
+  void startServer(int port);
 };
 
 #endif //FLIGHTSIM_COMMANDS_OPENSERVER_H_

@@ -6,6 +6,8 @@ void flightSim::run() {
   std::vector<std::string> tokens = lexer::lex(this->fileName);
   int index = 0;
   std::vector<std::string> serverags = {"5400"};
+  this->varManager->addBoundTable("/sim/time/warp",new Variable(0, "/sim/time/warp"));
+  this->varManager->addBoundTable("/engines/engine/rpm",new Variable(0,"/engines/engine/rpm"));
   this->commandsMap.at("openDataServer")->execute(serverags);
   /*
   while (index < tokens.size()) {
@@ -27,7 +29,7 @@ void flightSim::run() {
 void flightSim::generateMap() {
   this->commandsMap["openDataServer"] = new OpenServer(this->varManager);
   this->commandsMap["connectControlClient"] = new OpenClient();
-  this->commandsMap["var"] = new DefineVar(*this->varManager);
+  this->commandsMap["var"] = new DefineVar(this->varManager);
   this->commandsMap["Sleep"] = new Sleep();
   this->commandsMap["Print"] = new Print();
 }

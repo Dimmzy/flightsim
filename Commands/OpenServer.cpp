@@ -1,10 +1,13 @@
 
+#include <sstream>
+#include <cstring>
 #include "OpenServer.h"
 
 int OpenServer::execute(std::vector<std::string> args) {
   int port = std::stoi(args[0]);
-  std::thread serverThread(startServer,port);
+  std::thread serverThread(&OpenServer::startServer,this,port);
   serverThread.join();
+  this->startServer(port);
   return 2;
 }
 
@@ -28,8 +31,17 @@ void OpenServer::startServer(int port) {
   }
   close(socketfd);
   char buffer[1024] = {0};
-  while(read(client_socket, buffer, 1024) > 0)
-    std::cout << buffer << std::endl;
-  // Write a parser that maps the variables and their values to our HashMap
+  while(read(client_socket, buffer, 1024) > 0) {
+    char* noNewLine = strtok(buffer, "\n");
+    char* token = strtok(noNewLine, ",");
+    for(const auto& path : this->vm->XMLVars) {
 
+      if (this->vm->getBoundTable().count(path)) {
+        this->vm->getBoundTable().at(path)->setValue(std::stod(token));
+        std::cout << "updated " + path + " to " + token << std::endl;
+        std::cout << "proof: " + std::to_string(this->vm->getBoundTable().at(path)->getValue()) << std::endl;
+      }
+      token = strtok(nullptr, ",");
+    }
+  }
 }
