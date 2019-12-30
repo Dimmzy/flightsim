@@ -11,6 +11,7 @@
 #include "Commands/OpenServer.h"
 #include "Commands/Print.h"
 #include "Commands/Sleep.h"
+#include "Expression/Interpreter.h"
 
 
 class flightSim {
