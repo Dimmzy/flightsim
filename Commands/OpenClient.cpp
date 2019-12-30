@@ -1,10 +1,12 @@
-
+#include <mutex>
 #include "OpenClient.h"
 
+std::mutex mtx;
 
 int OpenClient::execute(std::vector<std::string> args) {
   const char* ip = args[0].c_str();
   int port = std::stoi(args[1]);
+  mtx.lock();
   std::thread clientThread(&OpenClient::startClient,this,ip,port);
   return 3;
 }
@@ -22,6 +24,7 @@ void OpenClient::startClient(const char* ip, int port) {
     std::cerr << "Couldn't connect to host" << std::endl;
   // Add functionality of sending information through the client to the server
   this->clientSocket = client_socket;
+  mtx.unlock();
 }
 void OpenClient::sendUpdate(const std::string& message) {
   ssize_t return_val;

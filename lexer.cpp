@@ -18,8 +18,9 @@ vector<string> lexer::lex(string file) {
   }
 
   for(string str:vectorString) {
-    cout << str + ",";
+    cout << str <<endl;
   }
+
 
   return vectorString;
 }
@@ -112,7 +113,8 @@ void lexer::lexingTokens(vector<string>& vectorString, std::ifstream& in_file) {
   void lexer::postLexing(std::vector<std::string> &vectorOfTokens) {
     //iterate the vector of tokens and erase unwanted '"' and spaces
     for (unsigned i = 0; i < vectorOfTokens.size(); i++) {
-      vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), ' '), vectorOfTokens[i].end());
+      if (vectorOfTokens[i][0] != '"')
+        vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), ' '), vectorOfTokens[i].end());
       vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), '"'), vectorOfTokens[i].end());
     }
   }
