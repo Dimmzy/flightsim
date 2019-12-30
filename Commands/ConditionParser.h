@@ -6,7 +6,7 @@ class ConditionParser : public Command {
  private:
   std::vector<Command*> cmdVector;
  public:
-  int execute(std::vector<std::string> args);
+  int execute(std::vector<std::string> lexVector, int index);
 };
 
 

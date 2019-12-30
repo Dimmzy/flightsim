@@ -5,7 +5,7 @@
 
 class OpenClient : public Command {
  public:
-  int execute(std::vector<std::string> args);
+  int execute(std::vector<std::string> lexVector, int index);
   void sendUpdate(const std::string& message);
  private:
   int  clientSocket;

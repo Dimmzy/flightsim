@@ -1,7 +1,9 @@
 
 #include "Print.h"
+#define ARG_OFFSET 1
+#define END_OFFSET 4
 
-int Print::execute(std::vector<std::string> args) {
-  std::cout << args[1] << std::endl;
-  return 3;
+int Print::execute(std::vector<std::string> lexVector, int index) {
+  std::cout << lexVector[index + ARG_OFFSET] << std::endl;
+  return END_OFFSET;
 }

@@ -7,7 +7,7 @@ class DefineVar : public Command {
   VariableManager* varManager;
  public:
   explicit DefineVar(VariableManager* vm) : varManager(vm) {};
-  int execute(std::vector<std::string> args) override;
+  int execute(std::vector<std::string> lexVector, int index) override;
 };
 
 #endif //FLIGHTSIM_COMMANDS_DEFINEVAR_H_

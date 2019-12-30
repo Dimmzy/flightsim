@@ -4,7 +4,7 @@
 
 class DoIf : public Command {
  public:
-  int execute(std::vector<std::string> args);
+  int execute(std::vector<std::string> lexVector, int index);
 };
 
 #endif //FLIGHTSIM_COMMANDS_DOIF_H_

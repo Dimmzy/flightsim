@@ -12,6 +12,7 @@
 #include "Commands/Print.h"
 #include "Commands/Sleep.h"
 #include "Expression/Interpreter.h"
+#include "Expression/Expression.h"
 
 
 class flightSim {
@@ -19,9 +20,10 @@ class flightSim {
   std::map<std::string, Command*> commandsMap;
   VariableManager* varManager;
   OpenClient* client;
+  Interpreter* interpreter;
 
  public:
-  flightSim(std::string name) : fileName(name) {};
+  flightSim(std::string name) : fileName(name),interpreter(new Interpreter()) {};
   void run();
  private:
   void generateMap();

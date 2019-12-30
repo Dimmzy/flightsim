@@ -18,7 +18,7 @@ class Command {
  public:
   Command()= default;
   virtual ~Command()= default;
-  virtual int execute(std::vector<std::string> args) = 0;
+  virtual int execute(std::vector<std::string> lexVector, int index) = 0;
 };
 
 
