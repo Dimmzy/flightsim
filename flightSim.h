@@ -20,10 +20,10 @@ class flightSim {
   std::map<std::string, Command*> commandsMap;
   VariableManager* varManager;
   OpenClient* client;
-  Interpreter* interpreter;
+  Interpreter* expressionInterpreter;
 
  public:
-  flightSim(std::string name) : fileName(name),interpreter(new Interpreter()) {};
+  flightSim(std::string name);
   void run();
  private:
   void generateMap();

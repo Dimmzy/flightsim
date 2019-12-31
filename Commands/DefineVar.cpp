@@ -9,9 +9,11 @@ int DefineVar::execute(std::vector<std::string> lexVector, int index) {
   std::string varPath = lexVector[index + PATH_OFFSET];
   auto* newVar = new Variable(0,varPath); // Initialize value to zero
   if (lexVector[index + OP_OFFSET] == "<-") { // Bound variable
+    std::cout << "Added Bound Variable: " + varName << std::endl;
     this->varManager->addBoundTable(varPath,newVar);
     this->varManager->addSymbol(varName,newVar);
   } else  { // Regular variable
+    std::cout << "Added Regular Variable: " + varName << std::endl;
     this->varManager->addSymbol(varName,newVar);
   }
   return END_OFFSET;

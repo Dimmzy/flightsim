@@ -8,9 +8,10 @@
 
 class OpenServer : public Command {
  public:
-  explicit OpenServer(VariableManager* varm) : vm(varm) {};
+  explicit OpenServer(VariableManager* varman, Interpreter* interp) : vm(varman),interpreter(interp) {};
   int execute(std::vector<std::string> lexVector, int index) override;
  private:
+  Interpreter* interpreter;
   VariableManager* vm;
   void startServer(int port);
 };
