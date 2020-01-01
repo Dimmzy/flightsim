@@ -142,6 +142,7 @@ void lexer::lexingTokens(vector<string>& vectorString, std::ifstream& in_file) {
       vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), '"'),
                                vectorOfTokens[i].end());
     }
+
   }
 
 
