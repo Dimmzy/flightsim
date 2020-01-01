@@ -36,7 +36,6 @@ void OpenServer::startServer(int port) {
   close(socketfd);
   char buffer[1024] = {0};
   std::cout << "Server Opened Succesfully" << std::endl;
-  mtx.unlock();
   while(read(client_socket, buffer, 1024) > 0) {
     char* noNewLine = strtok(buffer, "\n");
     char* token = strtok(noNewLine, ",");
