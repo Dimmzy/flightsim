@@ -28,11 +28,7 @@ Expression *Interpreter::interpret(const string &str) {
       expStack.push(new Value(stod(curr)));
 
     if (regex_match(curr, variable)) {
-      auto it = this->varMap.find(curr);
-      // IF we don't find the variable in our assigned vars list throw an exception
-      if (it == this->varMap.end())
-        throw "Variable isn't defined";
-      double val = stod(this->varMap.find(curr)->second);
+      double val = this->varManager->getSymbolTable().at(curr)->getValue();
       expStack.push(new ExpressionVariable(curr, val));
     }
 
@@ -64,27 +60,6 @@ Expression *Interpreter::interpret(const string &str) {
     postfix.pop();
   }
   return expStack.top();
-}
-
-void Interpreter::setVariables(const string &vars) {
-  vector<string> variableTokens = tokenize(vars, ';');
-  regex variable("(_[0-9a-zA-Z_]*?)|([a-zA-Z]+[0-9a-zA-Z_]*)");
-  regex value("[0-9]+[.]*[0-9]*");
-  // Map variables and their double values to the varMap variable.
-  for (auto &variableToken : variableTokens) {
-    vector<string> tokenized = tokenize(variableToken, '=');
-    for (auto &var : this->varMap) {
-      if (var.first == tokenized[0]) {
-        var.second = tokenized[1];
-        continue;
-      }
-    }
-    if (!regex_match(tokenized[0], variable))
-      throw ("Invalid Variable Format");
-    if (!regex_match(tokenized[1], value))
-      throw ("Invalid Variable Value Specified");
-    this->varMap.insert(pair<string, string>(tokenized[0], tokenized[1]));
-  }
 }
 
 queue<string> Interpreter::ShuntingYard(string str) {
@@ -171,14 +146,7 @@ bool Interpreter::isOperator(const string &s) {
   return (s == "+" || s == "-" || s == "*" || s == "/" || s == "@" || s == "#");
 }
 
-// Tokenizes a string by the given delimiter using stringstream
-vector<string> Interpreter::tokenize(const string &str, const char delimiter) {
-  vector<string> tokens;
-  string currentToken;
-  istringstream tokenStream(str);
-  while (getline(tokenStream, currentToken, delimiter))
-    tokens.push_back(currentToken);
-  return tokens;
-}
+
+Interpreter::Interpreter(VariableManager *var_manager) : varManager(var_manager) {}
 
 
