@@ -16,8 +16,6 @@ int OpenServer::execute(std::vector<std::string> lexVector, int index) {
 }
 
 void OpenServer::startServer(int port) {
-  std::mutex mtx;
-  mtx.lock();
   int socketfd = socket(AF_INET, SOCK_STREAM, 0);
   if (socketfd == -1)
     std::cerr << "Couldn't create socket" << std::endl;
@@ -38,7 +36,6 @@ void OpenServer::startServer(int port) {
   close(socketfd);
   char buffer[1024] = {0};
   std::cout << "Server Opened Succesfully" << std::endl;
-  mtx.unlock();
   while(read(client_socket, buffer, 1024) > 0) {
     char* noNewLine = strtok(buffer, "\n");
     char* token = strtok(noNewLine, ",");
