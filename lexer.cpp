@@ -78,11 +78,14 @@ void lexer::lexingTokens(vector<string>& vectorString, std::ifstream& in_file) {
             temp = "";
           }
           vectorString.push_back("=");
+
           //the following 4 lines take the all the string from the '=' character to the end of the line
           ++it; //skip the space
           pos = line.find("="); //find the index of the character '=' in the line
           temp = line.substr(pos + 1, line.length() - 1); //take the all string from '=' character to the end of
           // the line
+          vectorString.push_back(temp);
+          temp = "";
           it = line.end() - 1; //the loop will יקדם the pointer almost to the end lf the line because the loop will תקדם
           // to the end of the line
           continue;
@@ -139,6 +142,7 @@ void lexer::lexingTokens(vector<string>& vectorString, std::ifstream& in_file) {
       vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), '"'),
                                vectorOfTokens[i].end());
     }
+
   }
 
 
