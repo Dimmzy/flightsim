@@ -11,6 +11,7 @@ int OpenServer::execute(std::vector<std::string> lexVector, int index) {
   Expression* exp = this->interpreter->interpret(lexVector[index + ARG_OFFSET]);
   int port = exp->calculate();
   std::thread serverThread(&OpenServer::startServer,this,port);
+  serverThread.detach();
   return END_OFFSET;
 }
 

@@ -12,7 +12,7 @@ int DefineVar::execute(std::vector<std::string> lexVector, int index) {
     std::cout << "Added Bound Variable: " + varName << std::endl;
     this->varManager->addBoundTable(varPath,newVar);
     this->varManager->addSymbol(varName,newVar);
-  } else  { // Regular variable
+  } else  { // Regular variab
     std::cout << "Added Regular Variable: " + varName << std::endl;
     this->varManager->addSymbol(varName,newVar);
   }

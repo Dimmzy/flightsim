@@ -8,6 +8,7 @@ int OpenClient::execute(std::vector<std::string> lexVector, int index) {
   const char* ip = lexVector[index + ARG_OFFSET].substr(0,lexVector[index + ARG_OFFSET].find(',')).c_str();
   int port = std::stoi(lexVector[index + ARG_OFFSET].substr(lexVector[index + ARG_OFFSET].find(',') + 1));
   std::thread clientThread(&OpenClient::startClient,this,ip,port);
+  clientThread.detach();
   return END_OFFSET;
 }
 
