@@ -1,5 +1,4 @@
 #include "flightSim.h"
-
 #include <utility>
 #define EXP_OFFSET 2
 #define VAR_OFFSET 3
@@ -7,6 +6,7 @@
 void flightSim::run() {
   this->generateMap();
   std::vector<std::string> tokens = lexer::lex(this->fileName );
+
   int index = 0;
   while (index < tokens.size()) {
     std::cout << "Command Number " + std::to_string(index) << std::endl;
@@ -23,6 +23,7 @@ void flightSim::run() {
       index += VAR_OFFSET;
     }
   }
+
 }
 
 void flightSim::generateMap() {

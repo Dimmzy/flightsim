@@ -1,3 +1,15 @@
-openDataServer(5400)
-var warp -> sim("/sim/time/warp")
-warp = 500
+while rpm <= 750 {
+	Print(rpm)
+}
+
+
+
+
+while
+rpm<=750
+{
+Print
+(
+rpm
+)
+}
