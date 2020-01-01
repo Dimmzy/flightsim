@@ -1,5 +1,5 @@
 #include "Sleep.h"
-#define ARG_OFFSET 1
+#define ARG_OFFSET 2
 #define END_OFFSET 4
 
 int Sleep::execute(std::vector<std::string> lexVector, int index) {
