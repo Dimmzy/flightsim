@@ -8,7 +8,7 @@
  */
 class lexer {
  public:
-  static std::vector<std::string> lex(std::string file);
+  static std::vector<std::string> lex(std::string& file);
   static void lexingTokens(std::vector<std::string>& vectorString, std::ifstream& in_file);
   static void postLexing(std::vector<std::string>& vectorOfTokens);
 };

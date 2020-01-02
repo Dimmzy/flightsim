@@ -2,7 +2,7 @@
 #include <iostream>
 #include "algorithm"
 
-vector<string> lexer::lex(const string file) {
+vector<string> lexer::lex(const string& file) {
   vector<string> vectorString;
   std::ifstream in_file{file, ios::in};
 
@@ -120,6 +120,9 @@ void lexer::lexingTokens(vector<string>& vectorString, std::ifstream& in_file) {
 
   }
   postLexing(vectorString);
+  for(auto it = vectorString.begin(); it < vectorString.end(); ++it) {
+    cout << *it << endl;
+  }
 }
 
 /**
@@ -129,15 +132,13 @@ void lexer::lexingTokens(vector<string>& vectorString, std::ifstream& in_file) {
   void lexer::postLexing(std::vector<std::string> &vectorOfTokens) {
     //iterate the vector of tokens and erase unwanted '"' and spaces
     for (unsigned i = 0; i < vectorOfTokens.size(); i++) {
-
-      if (vectorOfTokens[i][0] != '"') { //if the token is a literal sentence we dont want to erase the spaces
+      if(vectorOfTokens[i][0] != '"') { //if the token is a literal sentence we dont want to erase the spaces
         vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), ' '),
                                 vectorOfTokens[i].end());
       }
-      vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), '"'),
-                               vectorOfTokens[i].end());
+      if(!(i >=2 && vectorOfTokens[i - 2] == "Print")) { //we dont want to erase '"' if it's in Print otherwise we do
+        vectorOfTokens[i].erase(std::remove(vectorOfTokens[i].begin(), vectorOfTokens[i].end(), '"'),
+                                vectorOfTokens[i].end());
+      }
     }
-
   }
-
-
