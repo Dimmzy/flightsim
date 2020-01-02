@@ -1,7 +1,3 @@
-//
-// Created by dima on 16/12/2019.
-//
-
 #include "lexer.h"
 #include <iostream>
 #include "algorithm"
@@ -16,12 +12,11 @@ vector<string> lexer::lex(const string file) {
   } else {
     throw "an error occured while opening ""fly.txt"" file";
   }
-
+/*
   for(const string str:vectorString) {
     cout << str <<endl;
   }
-
-
+*/
   return vectorString;
 }
 

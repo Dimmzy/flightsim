@@ -1,11 +1,11 @@
-//
-// Created by dima on 16/12/2019.
-//
-
 #ifndef FLIGHTSIM__LEXER_H_
 #define FLIGHTSIM__LEXER_H_
+
 #include "flightSim.h"
 
+/**
+ * The lexer class handles lexing and outputting a vector of strings from the file we're supposed to parse.
+ */
 class lexer {
  public:
   static std::vector<std::string> lex(std::string file);

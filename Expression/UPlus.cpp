@@ -1,9 +1,7 @@
-
-
 #include "UPlus.h"
-UPlus::UPlus(Expression *exp) : UnaryOperator(exp) {
 
-}
+UPlus::UPlus(Expression *exp) : UnaryOperator(exp) {}
+
 double UPlus::calculate() {
   return UnaryOperator::express->calculate();
 }

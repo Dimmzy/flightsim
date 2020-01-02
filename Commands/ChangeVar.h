@@ -7,6 +7,9 @@
 #include "../Expression/Expression.h"
 #include "../Expression/Interpreter.h"
 
+/**
+ * ChangeVar class is a Command type object that handles updating the current variables to new values as parsed.
+ */
 class ChangeVar : public Command{
  private:
   Interpreter* expressionInterpreter;

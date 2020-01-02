@@ -4,9 +4,17 @@
 #define OP_OFFSET 2
 #define END_OFFSET 7
 
+/**
+ * We extract the variable information, insert it to our commandsMap and the corresponding maps to it's type.
+ * @param lexVector Our parsed vector
+ * @param index The current index we're iterating through.
+ * @return The offset we move through our parsed vector.
+ */
 int DefineVar::execute(std::vector<std::string> lexVector, int index) {
+  // Extracts name and path through offsets
   std::string varName = lexVector[index + NAME_OFFSET];
   std::string varPath = lexVector[index + PATH_OFFSET];
+  // Adds the variable to the commands map so we can execute a value change through it.
   this->commandsMap->insert(std::pair<std::string,Command*>(varName,this->changeVarCommand));
   auto* newVar = new Variable(0,varPath); // Initialize value to zero
   if (lexVector[index + OP_OFFSET] == "<-") { // Bound variable

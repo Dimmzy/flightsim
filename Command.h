@@ -13,7 +13,9 @@
 #include "VariableManager.h"
 #include "Variable.h"
 
-
+/**
+ * The Command interface allows us to define the commands we parse as objects that can execute corresponding actions.
+ */
 class Command {
  public:
   Command()= default;

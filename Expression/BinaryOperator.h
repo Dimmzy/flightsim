@@ -1,8 +1,11 @@
-
 #ifndef EX1__BINARYOPERATOR_H_
 #define EX1__BINARYOPERATOR_H_
 
 #include "Expression.h"
+
+/**
+ * Binary Operator Expression
+ */
 class BinaryOperator : public Expression {
  protected:
   Expression *rightExp;

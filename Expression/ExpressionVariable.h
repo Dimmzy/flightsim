@@ -1,9 +1,12 @@
-
 #ifndef EX1__EXPRESSIONVARIABLE_H_
 #define EX1__EXPRESSIONVARIABLE_H_
+
 #include <string>
 #include "Expression.h"
 
+/**
+ * ExpressionVariable class allows us to overload operators over our predefined variables and calculate the result.
+ */
 class ExpressionVariable : public Expression {
  public:
   ExpressionVariable(std::string name, double value);

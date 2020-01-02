@@ -1,4 +1,3 @@
-
 #include <stack>
 #include <queue>
 #include <regex>
@@ -24,14 +23,16 @@ Expression *Interpreter::interpret(const string &str) {
   while (!postfix.empty()) {
     // While postfix queue isn't empty, check the current token and create an expression out of it
     string curr = postfix.front();
+    // We matched a number
     if (regex_match(curr, number))
       expStack.push(new Value(stod(curr)));
-
+    // We matched a variable
     if (regex_match(curr, variable)) {
+      // Gets the value of the variable from the symbolTable through the VariableManager.
       double val = this->varManager->getSymbolTable().at(curr)->getValue();
       expStack.push(new ExpressionVariable(curr, val));
     }
-
+    // We matched an Unary operator.
     if (regex_match(curr, unaryOp)) {
       Expression *op = expStack.top();
       expStack.pop();
@@ -42,7 +43,7 @@ Expression *Interpreter::interpret(const string &str) {
       else
         expStack.push(new UPlus(op));
     }
-
+    // We matched a Binary operator.
     if (regex_match(curr, binaryOp)) {
       Expression *op1 = expStack.top();
       expStack.pop();
@@ -129,7 +130,7 @@ queue<string> Interpreter::ShuntingYard(string str) {
   return postfix;
 }
 
-// Precedence list for the operators, unaries are always highest priority.
+// Precedence list for the operators, Unary operators are always highest priority.
 int Interpreter::precedence(const string &s) {
   if (s == "@" || s == "#")
     return 3;
@@ -141,7 +142,7 @@ int Interpreter::precedence(const string &s) {
     return 0;
 }
 
-// Check if the string is an operator
+// Checks if the string is an operator
 bool Interpreter::isOperator(const string &s) {
   return (s == "+" || s == "-" || s == "*" || s == "/" || s == "@" || s == "#");
 }
