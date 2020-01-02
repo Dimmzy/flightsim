@@ -28,7 +28,7 @@ count) {
 
 bool ConditionParser::booleanOperator(std::string& booleanString) {
   int count = 0;
-  const std::string charArray[] = {"<=", ">=", "<", ">", "=="};
+  const std::string charArray[] = {"<=", ">=", "<", ">", "==", "!="};
   std::string conditionCharacter;
   size_t pos = indexOfBeginningOfCondition(charArray, booleanString, &count);
   std::string expression1 = booleanString.substr(0, pos - 1), expression2;
