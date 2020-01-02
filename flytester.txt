@@ -1,6 +1,4 @@
-openDataServer(5400)
 var rpm <- sim("/engines/engine/rpm")
-connectControlClient("127.0.0.1",5402)
 var warp -> sim("/sim/time/warp")
 var primer -> sim("/controls/engines/engine/primer")
 warp = 35

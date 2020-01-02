@@ -21,6 +21,7 @@ class flightSim {
   VariableManager* varManager;
   OpenClient* client;
   Interpreter* expressionInterpreter;
+  ChangeVar* changeCommand;
 
  public:
   flightSim(std::string name);
