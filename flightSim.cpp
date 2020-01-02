@@ -1,13 +1,7 @@
 #include "flightSim.h"
-#include <thread>
 #include <utility>
-#include <mutex>
-#include <condition_variable>
 #define EXP_OFFSET 2
 #define VAR_OFFSET 3
-
-std::mutex mtx;
-std::condition_variable cv;
 
 void flightSim::run() {
   this->generateMap();
@@ -32,7 +26,7 @@ void flightSim::run() {
 }
 
 void flightSim::generateMap() {
-  this->commandsMap["openDataServer"] = new OpenServer(this->varManager, this->expressionInterpreter, &cv, &mtx);
+  this->commandsMap["openDataServer"] = new OpenServer(this->varManager, this->expressionInterpreter);
   this->commandsMap["connectControlClient"] = this->client;
   this->commandsMap["var"] = new DefineVar(this->varManager);
   this->commandsMap["Sleep"] = new Sleep(this->expressionInterpreter);

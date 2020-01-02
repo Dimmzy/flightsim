@@ -6,11 +6,15 @@
 #define ARG_OFFSET 2
 #define END_OFFSET 4
 
+std::mutex mtxS;
+std::condition_variable condVarS;
 
 int OpenServer::execute(std::vector<std::string> lexVector, int index) {
   Expression* exp = this->interpreter->interpret(lexVector[index + ARG_OFFSET]);
   int port = exp->calculate();
+  std::unique_lock<std::mutex> lck(mtxS);
   std::thread serverThread(&OpenServer::startServer,this,port);
+  condVarS.wait(lck);
   serverThread.detach();
   return END_OFFSET;
 }
@@ -36,7 +40,11 @@ void OpenServer::startServer(int port) {
   close(socketfd);
   char buffer[1024] = {0};
   std::cout << "Server Opened Succesfully" << std::endl;
+  mtxS.unlock();
+  condVarS.notify_one();
   while(read(client_socket, buffer, 1024) > 0) {
+    std::cout << "Server Read ";
+    std::cout << buffer << std::endl;
     char* noNewLine = strtok(buffer, "\n");
     char* token = strtok(noNewLine, ",");
     for(const auto& path : this->vm->XMLVars) {
