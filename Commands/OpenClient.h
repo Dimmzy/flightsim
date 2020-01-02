@@ -1,8 +1,12 @@
 #ifndef FLIGHTSIM_COMMANDS_OPENCLIENT_H_
 #define FLIGHTSIM_COMMANDS_OPENCLIENT_H_
+
 #include "../Command.h"
 #include "../Expression/Interpreter.h"
 
+/**
+ * OpenClient class handles opening a socket through which we connect as a client to the simulator and send updates.
+ */
 class OpenClient : public Command {
  public:
   OpenClient(Interpreter* interp) : interpreter(interp) {};

@@ -1,4 +1,3 @@
-
 #include <sstream>
 #include <cstring>
 #include <mutex>
@@ -6,15 +5,30 @@
 #define ARG_OFFSET 2
 #define END_OFFSET 4
 
+// We'll use a mutex and a conditional variable to lock the state while we wait for connection
+std::mutex mtxS;
+std::condition_variable condVarS;
 
+/**
+ * We calculate the port through the Expression object, lock the mutex and start the server.
+ * @param lexVector Our parsed vector
+ * @param index The current index we're iterating through.
+ * @return The offset we move through our parsed vector.
+ */
 int OpenServer::execute(std::vector<std::string> lexVector, int index) {
   Expression* exp = this->interpreter->interpret(lexVector[index + ARG_OFFSET]);
   int port = exp->calculate();
+  std::unique_lock<std::mutex> lck(mtxS);
   std::thread serverThread(&OpenServer::startServer,this,port);
+  condVarS.wait(lck);
   serverThread.detach();
   return END_OFFSET;
 }
 
+/**
+ * The function opens a socket listening on the passed port, and unlocks the mutex once connection is established.
+ * @param port the port our server is listening on.
+ */
 void OpenServer::startServer(int port) {
   int socketfd = socket(AF_INET, SOCK_STREAM, 0);
   if (socketfd == -1)
@@ -35,15 +49,22 @@ void OpenServer::startServer(int port) {
   }
   close(socketfd);
   char buffer[1024] = {0};
-  std::cout << "Server Opened Succesfully" << std::endl;
+  bool unlocked = false;
+  std::cout << "Server Opened Successfully" << std::endl;
   while(read(client_socket, buffer, 1024) > 0) {
+    // Unlocks the mutex once we received information from the simulator.
+    if (!unlocked) {
+      condVarS.notify_one();
+      mtxS.unlock();
+      unlocked = true;
+    }
     char* noNewLine = strtok(buffer, "\n");
     char* token = strtok(noNewLine, ",");
+    // Checks for each index in our XML table
     for(const auto& path : this->vm->XMLVars) {
+      // If we're tracking this variable, update it.
       if (this->vm->getBoundTable().count(path)) {
         this->vm->getBoundTable().at(path)->setValue(std::stod(token));
-        std::cout << "updated " + path + " to " + token << std::endl;
-        std::cout << "proof: " + std::to_string(this->vm->getBoundTable().at(path)->getValue()) << std::endl;
       }
       token = strtok(nullptr, ",");
     }

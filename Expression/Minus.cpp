@@ -1,9 +1,7 @@
-
-
 #include "Minus.h"
-Minus::Minus(Expression *right, Expression *left) : BinaryOperator(left, right) {
 
-}
+Minus::Minus(Expression *right, Expression *left) : BinaryOperator(left, right) {}
+
 double Minus::calculate() {
   return BinaryOperator::rightExp->calculate() - BinaryOperator::leftExp->calculate();
 }

@@ -1,20 +1,39 @@
 #include <mutex>
+#include <condition_variable>
+#include <cstring>
 #include "OpenClient.h"
 #define ARG_OFFSET 2
 #define END_OFFSET 4
 
+// We'll use a mutex and a conditional variable to lock the state while we wait for connection
+std::mutex mtxC;
+std::condition_variable condVarC;
 
+/**
+ * We extract the needed connection info from the file, lock the mutex and wait for the connection.
+ * @param lexVector Our parsed vector
+ * @param index The current index we're iterating through.
+ * @return The offset we move through our parsed vector.
+ */
 int OpenClient::execute(std::vector<std::string> lexVector, int index) {
-  const char* ip = lexVector[index + ARG_OFFSET].substr(0,lexVector[index + ARG_OFFSET].find(',')).c_str();
-  int port = std::stoi(lexVector[index + ARG_OFFSET].substr(lexVector[index + ARG_OFFSET].find(',') + 1));
+  // Extracts the IP and Port address from the vector string.
+  char *token = strtok(const_cast<char*>(lexVector[index + ARG_OFFSET].c_str()),",");
+  const char* ip = token;
+  token = strtok(nullptr, ",");
+  int port = std::stoi(token);
+  std::unique_lock<std::mutex> lck(mtxC);
   std::thread clientThread(&OpenClient::startClient,this,ip,port);
+  condVarC.wait(lck);
   clientThread.detach();
   return END_OFFSET;
 }
 
+/**
+ * Starts the client, when a connection is established, we unlock the mutex and let the process continue running.
+ * @param ip our simulator's IP address
+ * @param port our simulator's port address
+ */
 void OpenClient::startClient(const char* ip, int port) {
-  std::mutex mtx;
-  mtx.lock();
   int client_socket = socket(AF_INET, SOCK_STREAM, 0);
   if (client_socket == -1)
     std::cerr << "Couldn't create client socket" << std::endl;
@@ -25,11 +44,17 @@ void OpenClient::startClient(const char* ip, int port) {
   int is_connect = connect(client_socket, (struct sockaddr *)&address, sizeof(address));
   if (is_connect == -1)
     std::cerr << "Couldn't connect to host" << std::endl;
-  // Add functionality of sending information through the client to the server
   this->clientSocket = client_socket;
   std::cout << "Client Opened Successfully" << std::endl;
-  mtx.unlock();
+  // Unlock the mutex and notify the conditional variable we're finished.
+  mtxC.unlock();
+  condVarC.notify_one();
 }
+
+/**
+ * Used for sending variable updates to the simulator through a predefined message structure, using supplied string.
+ * @param message the message we send to the server (correct structure is handled by caller)
+ */
 void OpenClient::sendUpdate(const std::string& message) {
   ssize_t return_val;
   return_val = write(this->clientSocket,message.c_str(),message.length());

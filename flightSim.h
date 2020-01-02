@@ -1,5 +1,6 @@
 #ifndef FLIGHTSIM__FLIGHTSIM_H_
 #define FLIGHTSIM__FLIGHTSIM_H_
+
 #include <map>
 #include <string>
 #include <vector>
@@ -14,13 +15,17 @@
 #include "Expression/Interpreter.h"
 #include "Expression/Expression.h"
 
-
+/**
+ * The main running class.
+ * Handles the behavior and execution of the various commands and functions, runs the main loop of the program.
+ */
 class flightSim {
   std::string fileName;
   std::map<std::string, Command*> commandsMap;
   VariableManager* varManager;
   OpenClient* client;
   Interpreter* expressionInterpreter;
+  ChangeVar* changeCommand;
 
  public:
   flightSim(std::string name);

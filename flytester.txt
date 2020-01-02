@@ -1,5 +1,6 @@
-openDataServer(5400)
 var warp -> sim("/sim/time/warp")
 var primer -> sim("/controls/engines/engine/primer")
+warp = 35
+primer = 2 + warp
 Print("hello world")
 Sleep(25000)

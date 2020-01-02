@@ -1,5 +1,3 @@
-
-
 #include "UnaryOperator.h"
 
 UnaryOperator::UnaryOperator(Expression *exp) {

@@ -1,5 +1,3 @@
-
-
 #include "Value.h"
 
 double Value::calculate() {
