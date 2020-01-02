@@ -1,4 +1,3 @@
-var rpm <- sim("/engines/engine/rpm")
 var warp -> sim("/sim/time/warp")
 var primer -> sim("/controls/engines/engine/primer")
 warp = 35
