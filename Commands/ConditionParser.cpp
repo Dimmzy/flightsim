@@ -6,7 +6,7 @@ int ConditionParser::execute(std::vector<std::string> lexVector, int index) {
   return 0;
 }
 
-ConditionParser::ConditionParser(VariableManager* varManager, std::map<std::string, Command*>& commandsMap) {
+ConditionParser::ConditionParser(VariableManager* varManager, std::map<std::string, Command*>* commandsMap) {
   this->varManager = varManager;
   this->commandsMap = commandsMap;
 }

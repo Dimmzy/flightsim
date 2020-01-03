@@ -121,9 +121,12 @@ void lexer::lexingTokens(vector<string>& vectorString, std::ifstream& in_file) {
 
   }
   postLexing(vectorString);
+  /*
   for(auto it = vectorString.begin(); it < vectorString.end(); ++it) {
     cout << *it << endl;
   }
+   */
+
 }
 
 /**
