@@ -2,7 +2,8 @@
 #include <iostream>
 #include "algorithm"
 
-vector<string> lexer::lex(const string& file) {
+
+vector<string> lexer::lex(std::string& file) {
   vector<string> vectorString;
   std::ifstream in_file{file, ios::in};
 
