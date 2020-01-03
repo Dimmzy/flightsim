@@ -32,6 +32,7 @@ int DefineVar::execute(std::vector<std::string> lexVector, int index) {
     std::map<std::string, Variable*> symTable = this->varManager->getSymbolTable();
     std::string varPath = symTable.at(lexVector[index + DEFINED_OFFSET_PATH])->getPath();
     auto* newVar = new Variable(symTable.at(lexVector[index + DEFINED_OFFSET_PATH])->getValue(), varPath);
+    std::cout << "added new variable " + newVar->getPath() + "with the value" + std::to_string(newVar->getValue()) << std::endl;
     this->varManager->addSymbol(varName,newVar);
   }
   return END_OFFSET;

@@ -16,10 +16,10 @@ std::condition_variable condVarS;
  * @return The offset we move through our parsed vector.
  */
 int OpenServer::execute(std::vector<std::string> lexVector, int index) {
-  Expression* exp = this->interpreter->interpret(lexVector[index + ARG_OFFSET]);
+  Expression *exp = this->interpreter->interpret(lexVector[index + ARG_OFFSET]);
   int port = exp->calculate();
   std::unique_lock<std::mutex> lck(mtxS);
-  std::thread serverThread(&OpenServer::startServer,this,port);
+  std::thread serverThread(&OpenServer::startServer, this, port);
   condVarS.wait(lck);
   serverThread.detach();
   return END_OFFSET;
@@ -41,7 +41,7 @@ void OpenServer::startServer(int port) {
     std::cerr << "Couldn't bind socket to IP" << std::endl;
   if (listen(socketfd, 5) == -1)
     std::cerr << "Couldn't listen to socket" << std::endl;
-  int client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t*)&address);
+  int client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
   if (client_socket == -1)
     std::cerr << "Couldn't accept client" << std::endl;
   else {
@@ -51,17 +51,17 @@ void OpenServer::startServer(int port) {
   char buffer[1024] = {0};
   bool unlocked = false;
   std::cout << "Server Opened Successfully" << std::endl;
-  while(read(client_socket, buffer, 1024) > 0) {
+  while (read(client_socket, buffer, 1024) > 0) {
     // Unlocks the mutex once we received information from the simulator.
     if (!unlocked) {
       condVarS.notify_one();
       mtxS.unlock();
       unlocked = true;
     }
-    char* noNewLine = strtok(buffer, "\n");
-    char* token = strtok(noNewLine, ",");
+    char *noNewLine = strtok(buffer, "\n");
+    char *token = strtok(noNewLine, ",");
     // Checks for each index in our XML table
-    for(const auto& path : this->vm->XMLVars) {
+    for (const auto &path : this->vm->XMLVars) {
       // If we're tracking this variable, update it.
       if (this->vm->getBoundTable().count(path)) {
         this->vm->getBoundTable().at(path)->setValue(std::stod(token));

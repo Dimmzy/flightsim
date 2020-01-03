@@ -13,11 +13,9 @@ vector<string> lexer::lex(std::string& file) {
   } else {
     throw "an error occured while opening ""fly.txt"" file";
   }
-/*
   for(const string str:vectorString) {
     cout << str <<endl;
   }
-*/
   return vectorString;
 }
 
