@@ -30,7 +30,7 @@ void flightSim::generateMap() {
   this->commandsMap["connectControlClient"] = this->client;
   this->commandsMap["var"] = new DefineVar(this->varManager, &this->commandsMap,this->changeCommand);
   this->commandsMap["Sleep"] = new Sleep(this->expressionInterpreter);
-  this->commandsMap["Print"] = new Print();
+  this->commandsMap["Print"] = new Print(this->expressionInterpreter);
   this->commandsMap["while"] = new WhileLoop(this->commandsMap, this->varManager);
   this->commandsMap["while"] = new WhileLoop(this->commandsMap, this->varManager);
   this->commandsMap["if"] = new DoIf(this->commandsMap, this->varManager);
