@@ -1,6 +1,7 @@
 #include <stack>
 #include <queue>
 #include <regex>
+#include <iostream>
 #include "Interpreter.h"
 #include "Value.h"
 #include "UMinus.h"
@@ -30,6 +31,7 @@ Expression *Interpreter::interpret(const string &str) {
     if (regex_match(curr, variable)) {
       // Gets the value of the variable from the symbolTable through the VariableManager.
       double val = this->varManager->getSymbolTable().at(curr)->getValue();
+      std::cout << " Variable of : " + curr + " is : " + to_string(val) << std::endl;
       expStack.push(new ExpressionVariable(curr, val));
     }
     // We matched an Unary operator.

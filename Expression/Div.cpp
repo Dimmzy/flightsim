@@ -10,7 +10,7 @@ double Div::calculate() {
   if (BinaryOperator::leftExp->calculate() == 0) {
     return 0;
   }
-  return BinaryOperator::rightExp->calculate() / BinaryOperator::leftExp->calculate();
+  return BinaryOperator::leftExp->calculate() / BinaryOperator::rightExp->calculate();
 }
 
 Div::~Div() {

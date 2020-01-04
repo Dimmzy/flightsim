@@ -49,6 +49,7 @@ void OpenServer::startServer(int port) {
   }
   close(socketfd);
   char buffer[1024] = {0};
+  std::string input;
   bool unlocked = false;
   std::cout << "Server Opened Successfully" << std::endl;
   while (read(client_socket, buffer, 1024) > 0) {
@@ -58,15 +59,33 @@ void OpenServer::startServer(int port) {
       mtxS.unlock();
       unlocked = true;
     }
-    char *noNewLine = strtok(buffer, "\n");
-    char *token = strtok(noNewLine, ",");
-    // Checks for each index in our XML table
-    for (const auto &path : this->vm->XMLVars) {
-      // If we're tracking this variable, update it.
-      if (this->vm->getBoundTable().count(path)) {
-        this->vm->getBoundTable().at(path)->setValue(std::stod(token));
+    input += buffer;
+    // Didn't receive enough values
+    if (input.find('\n') == string::npos) {
+      std::cout << "not enough values!" << std::endl;
+      continue;
+    } else {
+      std::map<std::string, Variable*> boundTable = this->vm->getBoundTable();
+      int i = 0;
+      size_t pos = 0;
+      std::string delimiter = ",";
+      std::string token;
+      std::string path;
+      while ((pos = input.find(delimiter)) != std::string::npos) {
+        token = input.substr(0, pos);
+        path = this->vm->getVarPath(i);
+        if (boundTable.find(path) != boundTable.end()) {
+          boundTable.at(path)->setValue(std::stod(token));
+        }
+        i++;
+        input.erase(0, pos + delimiter.length());
       }
-      token = strtok(nullptr, ",");
+      path = this->vm->getVarPath(i);
+      if (boundTable.find(path) != boundTable.end()) {
+        boundTable.at(path)->setValue(std::stod(input));
+      }
+      i++;
+      input.clear();
     }
   }
 }

@@ -14,7 +14,6 @@ void flightSim::run() {
   int index = 0;
   // Main loop
   while (index < tokens.size()) {
-    std::cout << "Command Number " + std::to_string(index) << std::endl;
     if (commandsMap.find(tokens[index]) != commandsMap.end()) {
       Command *command = commandsMap.at(tokens[index]);
       index += command->execute(tokens, index);

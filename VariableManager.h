@@ -20,6 +20,7 @@ class VariableManager {
   void addBoundTable(std::string str, Variable* var);
   std::map<std::string, Variable*> getSymbolTable();
   std::map<std::string, Variable*> getBoundTable();
+  std::string getVarPath(int i);
 };
 
 #endif //FLIGHTSIM__VARIABLEMANAGER_H_
