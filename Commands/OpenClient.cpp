@@ -5,7 +5,6 @@
 #define ARG_OFFSET 2
 #define END_OFFSET 4
 
-typedef std::thread thread1;
 // We'll use a mutex and a conditional variable to lock the state while we wait for connection
 std::mutex mtxC;
 std::condition_variable condVarC;
@@ -23,7 +22,7 @@ int OpenClient::execute(std::vector<std::string> lexVector, int index) {
   token = strtok(nullptr, ",");
   int port = std::stoi(token);
   std::unique_lock<std::mutex> lck(mtxC);
-  thread1 clientThread;
+  std::thread clientThread(&OpenClient::startClient,this,ip,port);
   condVarC.wait(lck);
   clientThread.detach();
   return END_OFFSET;
