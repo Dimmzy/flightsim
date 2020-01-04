@@ -6,7 +6,7 @@
 class WhileLoop : public ConditionParser {
  public:
   int execute(std::vector<std::string> lexVector, int index);
-  WhileLoop(std::map<std::string, Command*>* commandsMap, VariableManager* varManager);
+  WhileLoop(std::map<std::string, Command*>* commandsMap, VariableManager* varManager, Interpreter *interpreter1);
 };
 
 #endif //FLIGHTSIM_COMMANDS_WHILELOOP_H_
