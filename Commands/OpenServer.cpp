@@ -84,7 +84,6 @@ void OpenServer::startServer(int port) {
       if (boundTable.find(path) != boundTable.end()) {
         boundTable.at(path)->setValue(std::stod(input));
       }
-      i++;
       input.clear();
     }
   }

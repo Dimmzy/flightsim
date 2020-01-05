@@ -15,7 +15,5 @@ int ChangeVar::execute(std::vector<std::string> lexVector, int index) {
   symTable.at(lexVector[index])->setValue(exp->calculate());
   this->client->sendUpdate("set " + symTable.at(lexVector[index])->getPath() + " " +
       to_string(symTable.at(lexVector[index])->getValue()) + "\r\n");
-  std::cout << "Var Changed " + lexVector[index] + " " + std::to_string(symTable.at(lexVector[index])->getValue())
-            << std::endl;
   return END_OFFSET;
 }

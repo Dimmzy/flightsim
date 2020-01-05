@@ -19,20 +19,16 @@ int DefineVar::execute(std::vector<std::string> lexVector, int index) {
   if (lexVector[index + OP_OFFSET] == "<-") { // Bound variable
     std::string varPath = lexVector[index + PATH_OFFSET];
     auto* newVar = new Variable(0,varPath); // Initialize value to zero
-    std::cout << "Added Bound Variable: " + varName << std::endl;
-    std::cout << "At path: " + varPath << std::endl;
     this->varManager->addBoundTable(varPath,newVar);
     this->varManager->addSymbol(varName,newVar);
   } else if (lexVector[index + OP_OFFSET] == "->")  { // Regular variable
     std::string varPath = lexVector[index + PATH_OFFSET];
     auto* newVar = new Variable(0,varPath);
-    std::cout << "Added Regular Variable: " + varName << std::endl;
     this->varManager->addSymbol(varName,newVar);
   } else { // new Variable using already defined variable's value
     std::map<std::string, Variable*> symTable = this->varManager->getSymbolTable();
     std::string varPath = symTable.at(lexVector[index + DEFINED_OFFSET_PATH])->getPath();
     auto* newVar = new Variable(symTable.at(lexVector[index + DEFINED_OFFSET_PATH])->getValue(), varPath);
-    std::cout << "added new variable " + newVar->getPath() + "with the value" + std::to_string(newVar->getValue()) << std::endl;
     this->varManager->addSymbol(varName,newVar);
   }
   return END_OFFSET;
