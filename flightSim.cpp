@@ -19,6 +19,8 @@ void flightSim::run() {
       index += command->execute(tokens, index);
     }
   }
+  free(this->expressionInterpreter);
+
 }
 
 /**

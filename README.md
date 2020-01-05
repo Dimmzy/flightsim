@@ -2,6 +2,9 @@
 #### Advanced Programming Course in Bar-Ilan University, 2019-2020
 The FlightSim Project revolves around builiding a platform to communicate with the [FlightGear](https://www.flightgear.org/) open-source flight simulator using a custom programming language that we parse and convert to actual commands to the simulator.
 
+[Github Repository](https://github.com/Dimmzy/flightsim)
+
+
 ## Usage
 Build the source using the g++ compiler and run the program with the file you'd like to parse as an argument
 ```bash
