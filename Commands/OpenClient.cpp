@@ -1,6 +1,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <cstring>
+#include <algorithm>
 #include "OpenClient.h"
 #define ARG_OFFSET 2
 #define END_OFFSET 4
@@ -20,7 +21,9 @@ int OpenClient::execute(std::vector<std::string> lexVector, int index) {
   char *token = strtok(const_cast<char*>(lexVector[index + ARG_OFFSET].c_str()),",");
   const char* ip = token;
   token = strtok(nullptr, ",");
-  int port = std::stoi(token);
+  std::string portStr(token);
+  portStr.erase(remove(portStr.begin(), portStr.end(), ' '), portStr.end());
+  int port = (int)this->interpreter->interpret(portStr)->calculate();
   std::unique_lock<std::mutex> lck(mtxC);
   std::thread clientThread(&OpenClient::startClient,this,ip,port);
   condVarC.wait(lck);
