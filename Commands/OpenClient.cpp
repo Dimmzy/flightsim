@@ -61,4 +61,8 @@ void OpenClient::sendUpdate(const std::string& message) {
   if (return_val == -1)
     std::cerr << "Couldn't send updated variable information" << std::endl;
 }
+void OpenClient::closeSocket() {
+  close(this->clientSocket);
+}
+
 

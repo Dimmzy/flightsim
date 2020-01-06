@@ -11,7 +11,7 @@ class Variable {
   std::string simPath;
 
  public:
-  Variable(double value, const std::string &sim_path);
+  Variable(double val, const std::string &sim_path);
   double getValue();
   std::string getPath();
   void setValue(double val);

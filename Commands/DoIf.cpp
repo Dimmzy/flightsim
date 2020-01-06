@@ -19,5 +19,6 @@ int DoIf::execute(std::vector<std::string> lexVector, int index) {
   }
   return index - indexTemp + 1;
 }
-DoIf::DoIf(std::map<std::string, Command *>* commandsMap, VariableManager *varManager, Interpreter* interpreter):
-ConditionParser(varManager, commandsMap, interpreter) {}
+
+DoIf::DoIf(std::map<std::string, Command *>* commandsM, VariableManager *varM, Interpreter* interpret):
+ConditionParser(varM, commandsM, interpret) {}

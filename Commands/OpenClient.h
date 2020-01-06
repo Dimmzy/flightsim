@@ -12,6 +12,7 @@ class OpenClient : public Command {
   OpenClient(Interpreter* interp) : interpreter(interp) {};
   int execute(std::vector<std::string> lexVector, int index);
   void sendUpdate(const std::string& message);
+  void closeSocket();
  private:
   Interpreter* interpreter;
   int  clientSocket;

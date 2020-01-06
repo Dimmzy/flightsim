@@ -14,11 +14,11 @@
  */
 class OpenServer : public Command {
  public:
-  explicit OpenServer(VariableManager* varman, Interpreter* interp) : vm(varman),interpreter(interp) {}
+  explicit OpenServer(VariableManager* varman, Interpreter* interp) : vm(varman), interpreter(interp) {}
   int execute(std::vector<std::string> lexVector, int index) override;
  private:
-  Interpreter* interpreter;
   VariableManager* vm;
+  Interpreter* interpreter;
   void startServer(int port);
 };
 

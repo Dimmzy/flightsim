@@ -11,7 +11,7 @@ void flightSim::run() {
   this->generateMap();
   // Gets the lexed vector
   std::vector<std::string> tokens = lexer::lex(this->fileName);
-  int index = 0;
+  size_t index = 0;
   // Main loop
   while (index < tokens.size()) {
     if (commandsMap.find(tokens[index]) != commandsMap.end()) {
@@ -19,8 +19,7 @@ void flightSim::run() {
       index += command->execute(tokens, index);
     }
   }
-  free(this->expressionInterpreter);
-
+  this->client->closeSocket();
 }
 
 /**

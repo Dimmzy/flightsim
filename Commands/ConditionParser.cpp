@@ -1,16 +1,17 @@
 #include "ConditionParser.h"
-#include "string.h"
-
+#include <cstring>
 #include "../Expression/Interpreter.h"
+
+
 int ConditionParser::execute(std::vector<std::string> lexVector, int index) {
   return 0;
 }
 
-ConditionParser::ConditionParser(VariableManager* varManager, std::map<std::string, Command*>* commandsMap,
-    Interpreter* interpreter) {
-  this->varManager = varManager;
-  this->commandsMap = commandsMap;
-  this->interpreter = interpreter;
+ConditionParser::ConditionParser(VariableManager* varM, std::map<std::string, Command*>* commandsM,
+                                 Interpreter* interpret) {
+  this->varManager = varM;
+  this->commandsMap = commandsM;
+  this->interpreter = interpret;
 }
 
 size_t ConditionParser::indexOfBeginningOfCondition(const std::string charArray[], const std::string& str, int*
@@ -45,26 +46,24 @@ bool ConditionParser::checkTrueOrFalse(const std::string& exp1,const std::string
   double val1, val2;
   Expression* e1 = this->interpreter->interpret(exp1);
   Expression* e2 = this->interpreter->interpret(exp2);
-
   val1 = e1->calculate();
   val2 = e2->calculate();
-
-  if(condition.compare("<=") == 0) {
+  if (condition == "<=") {
     return val1 <= val2;
   }
-  if(condition.compare("<") == 0) {
+  if (condition == "<") {
     return val1 < val2;
   }
-  if(condition.compare(">=") == 0) {
+  if (condition == ">=") {
     return val1 >= val2;
   }
-  if(condition.compare("==") == 0) {
+  if (condition == "==") {
     return val1 == val2;
   }
-  if(condition.compare(">") == 0) {
+  if (condition == ">") {
     return val1 > val2;
   }
-  if(condition.compare("!=") == 0) {
+  if (condition == "!=") {
     return val1 != val2;
   }
 }

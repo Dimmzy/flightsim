@@ -80,11 +80,12 @@ void OpenServer::startServer(int port) {
         i++;
         input.erase(0, pos + delimiter.length());
       }
-      path = this->vm->getVarPath(i);
-      if (boundTable.find(path) != boundTable.end()) {
-        boundTable.at(path)->setValue(std::stod(input));
-      }
+        path = this->vm->getVarPath(i);
+        if (boundTable.find(path) != boundTable.end()) {
+          boundTable.at(path)->setValue(std::stod(input));
+        }
       input.clear();
     }
   }
+  close(client_socket);
 }

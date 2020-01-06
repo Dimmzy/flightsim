@@ -6,7 +6,7 @@
 class DoIf : public ConditionParser {
  public:
   int execute(std::vector<std::string> lexVector, int index);
-  DoIf(std::map<std::string, Command*>* commandsMap, VariableManager* varManager, Interpreter* interpreter1);
+  DoIf(std::map<std::string, Command*>* commandsM, VariableManager* varM, Interpreter* interpret);
 };
 
 #endif //FLIGHTSIM_COMMANDS_DOIF_H_

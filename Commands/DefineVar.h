@@ -11,9 +11,9 @@
  */
 class DefineVar : public Command {
  private:
+  VariableManager* varManager;
   std::map<std::string, Command*>* commandsMap;
   ChangeVar* changeVarCommand;
-  VariableManager* varManager;
  public:
   explicit DefineVar(VariableManager* vm,std::map<std::string, Command*>*  cMap, ChangeVar* change) : varManager(vm),
   commandsMap(cMap), changeVarCommand(change) {};

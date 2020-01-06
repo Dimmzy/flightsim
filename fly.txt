@@ -26,6 +26,7 @@ Sleep(6000)
 Print("let's start")
 warp = 32000
 Sleep(1000)
+Print("After sleep")
 magnetos = 3
 throttle = 0.2
 mixture = 0.949

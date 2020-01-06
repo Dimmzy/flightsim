@@ -22,7 +22,7 @@ void Variable::setValue(double val) {
 }
 /**
  * Constructs the Variable
- * @param value the initial value of the Variable (usually 0).
+ * @param val the initial val of the Variable (usually 0).
  * @param sim_path the path of the variable in the simulator.
  */
-Variable::Variable(double value, const std::string &sim_path) : value(value), simPath(sim_path) {}
+Variable::Variable(double val, const std::string &sim_path) : value(val), simPath(sim_path) {}

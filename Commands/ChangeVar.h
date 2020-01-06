@@ -12,8 +12,8 @@
  */
 class ChangeVar : public Command{
  private:
-  Interpreter* expressionInterpreter;
   VariableManager* varManager;
+  Interpreter* expressionInterpreter;
   OpenClient* client;
  public:
   int execute(std::vector<std::string> lexVector, int index) override;

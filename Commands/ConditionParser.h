@@ -14,7 +14,7 @@ class ConditionParser : public Command {
   int execute(std::vector<std::string> lexVector, int index);
   bool booleanOperator(std::string& booleanString);
   size_t indexOfBeginningOfCondition(const std::string charArray[], const std::string& str, int* count);
-  ConditionParser(VariableManager* varManager, std::map<std::string, Command*>* commandsMap, Interpreter* interpreter);
+  ConditionParser(VariableManager* varM, std::map<std::string, Command*>* commandsM, Interpreter* interpret);
   bool checkTrueOrFalse(const std::string& exp1, const std::string& ex2, const std::string& condition);
 };
 

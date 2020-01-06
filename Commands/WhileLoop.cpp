@@ -19,6 +19,6 @@ int WhileLoop::execute(std::vector<std::string> lexVector, int index) {
   }
   return index - indexTemp + 1;
 }
-WhileLoop::WhileLoop(std::map<std::string, Command *>* commandsMap, VariableManager* varManager, Interpreter*
-interpreter1)
-:ConditionParser(varManager, commandsMap, interpreter1) { }
+WhileLoop::WhileLoop(std::map<std::string, Command *>* commandsM, VariableManager* varM, Interpreter*
+interpret)
+:ConditionParser(varM, commandsM, interpret) { }

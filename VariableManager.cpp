@@ -1,4 +1,5 @@
 #include "VariableManager.h"
+#include <iostream>
 
 /**
  * Adds a variable to our symbolTable
@@ -70,6 +71,7 @@ VariableManager::VariableManager() {
   this->XMLVars.emplace_back("/controls/switches/master-alt");
   this->XMLVars.emplace_back("/engines/engine/rpm");
 }
+
 std::string VariableManager::getVarPath(int i) {
   return this->XMLVars.at(i);
 }
