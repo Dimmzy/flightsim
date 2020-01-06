@@ -8,7 +8,7 @@ The FlightSim Project revolves around builiding a platform to communicate with t
 ## Usage
 Build the source using the g++ compiler and run the program with the file you'd like to parse as an argument
 ```bash
-g++ -std=c++14 *.cpp a.out
+g++ -std=c++14 */*.cpp *.cpp -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic -o a.out -pthread
 
 ./a.out fly.txt
 ```
