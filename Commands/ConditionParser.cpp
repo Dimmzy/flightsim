@@ -91,4 +91,5 @@ bool ConditionParser::checkTrueOrFalse(const std::string& exp1,const std::string
   if (condition == "!=") {
     return val1 != val2;
   }
+  return false; // Simply to suppress warnings, shouldn't reach here.
 }
