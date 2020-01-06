@@ -7,6 +7,12 @@ int ConditionParser::execute(std::vector<std::string> lexVector, int index) {
   return 0;
 }
 
+/**
+ * Constructor.
+ * @param varM
+ * @param commandsM
+ * @param interpret
+ */
 ConditionParser::ConditionParser(VariableManager* varM, std::map<std::string, Command*>* commandsM,
                                  Interpreter* interpret) {
   this->varManager = varM;
@@ -14,6 +20,13 @@ ConditionParser::ConditionParser(VariableManager* varM, std::map<std::string, Co
   this->interpreter = interpret;
 }
 
+/**
+ * The functions finds the first index of the condition characters { ==,<,>,<=,>=,!= }
+ * @param charArray The condition character { ==,<,>,<=,>=,!= }
+ * @param str The condition
+ * @param count The length of the condition character (options: 1 {<,>} or 2 {<=,>=,==,!=}
+ * @return The first index of the condition characters
+ */
 size_t ConditionParser::indexOfBeginningOfCondition(const std::string charArray[], const std::string& str, int*
 count) {
   size_t pos = std::string::npos;
@@ -29,6 +42,11 @@ count) {
   return pos;
 }
 
+/**
+ * The functions calculates the boolean operator.
+ * @param booleanString The condition
+ * @return true if the input condition is true, false otherwise
+ */
 bool ConditionParser::booleanOperator(std::string& booleanString) {
   int count = 0;
   const std::string charArray[] = {"<=", ">=", "<", ">", "==", "!="};
@@ -42,6 +60,13 @@ bool ConditionParser::booleanOperator(std::string& booleanString) {
   return checkTrueOrFalse(expression1, expression2, conditionCharacter);
 }
 
+/**
+ * The function checks if the input condition is true or false
+ * @param exp1 the left side of the condition
+ * @param exp2 the right side of the condition
+ * @param condition on of {"<=", ">=", "<", ">", "==", "!="}
+ * @return true if the input condition is true otherwise false
+ */
 bool ConditionParser::checkTrueOrFalse(const std::string& exp1,const std::string& exp2,const std::string& condition) {
   double val1, val2;
   Expression* e1 = this->interpreter->interpret(exp1);
