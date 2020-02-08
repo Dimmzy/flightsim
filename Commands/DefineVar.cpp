@@ -4,6 +4,7 @@
 #define OP_OFFSET 2
 #define DEFINED_OFFSET_PATH 3
 #define END_OFFSET 7
+#define LOW_END_OFFSET 4
 
 /**
  * We extract the variable information, insert it to our commandsMap and the corresponding maps to it's type.
@@ -30,6 +31,7 @@ int DefineVar::execute(std::vector<std::string> lexVector, int index) {
     std::string varPath = symTable.at(lexVector[index + DEFINED_OFFSET_PATH])->getPath();
     auto* newVar = new Variable(symTable.at(lexVector[index + DEFINED_OFFSET_PATH])->getValue(), varPath);
     this->varManager->addSymbol(varName,newVar);
+    return LOW_END_OFFSET;
   }
   return END_OFFSET;
 }
